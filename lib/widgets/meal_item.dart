@@ -1,17 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:meals_recipes/models/meal.dart';
+import 'package:meals_recipes/utils/app_routes.dart';
 
 class MealItem extends StatelessWidget {
   const MealItem({Key? key, required this.meal}) : super(key: key);
 
   final Meal meal;
 
-  void _selectMeal() {}
+  void _selectMeal(BuildContext context) {
+    Navigator.of(context).pushNamed(
+      AppRoutes.MEAL_DETAIL,
+      arguments: meal,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: _selectMeal,
+      onTap: () => _selectMeal(context),
       child: Card(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
         elevation: 4,
@@ -61,21 +67,27 @@ class MealItem extends StatelessWidget {
                   Row(
                     children: [
                       const Icon(Icons.schedule),
-                      const SizedBox(width: 6,),
+                      const SizedBox(
+                        width: 6,
+                      ),
                       Text('${meal.duration} min')
                     ],
                   ),
                   Row(
                     children: [
                       const Icon(Icons.work),
-                      const SizedBox(width: 6,),
+                      const SizedBox(
+                        width: 6,
+                      ),
                       Text(meal.complexityText)
                     ],
                   ),
                   Row(
                     children: [
                       const Icon(Icons.attach_money),
-                      const SizedBox(width: 6,),
+                      const SizedBox(
+                        width: 6,
+                      ),
                       Text(meal.costText)
                     ],
                   ),
